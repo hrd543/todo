@@ -38,14 +38,14 @@ const TodoItem = ({id, text, complete, onTextChange, onCompleteChange, onDelete}
     }
   }, []);
 
-	return (
-		<Div>
-			<Input type="checkbox" checked={complete} onChange={() => onCompleteChange(id)} />
-			<TodoText ref={todoRef} type="text" value={text} onChange={(e) => onTextChange(id, e.target.value)} readOnly={isReadOnly} />
-	    <Button onClick={() => onDelete(id)}>Delete</Button>
+  return (
+    <Div>
+      <Input type="checkbox" checked={complete} onChange={() => onCompleteChange(id)} />
+      <TodoText ref={todoRef} type="text" value={text} onChange={(e) => onTextChange(id, e.target.value)} readOnly={isReadOnly} />
+      <Button onClick={() => onDelete(id)}>Delete</Button>
       <Button onClick={() => setIsReadOnly(false)}>Edit</Button>
-		</Div>
-	);
+    </Div>
+  );
 }
 
 export default TodoItem;
