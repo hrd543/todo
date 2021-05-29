@@ -20,20 +20,10 @@ const Button = styled.button`
   flex: 0;
 `;
 
-// I think i need to add an onChange method to the text input form, and also some sort of readonly
-// property which could be en/disabled with the click of an edit button.
 
-const TodoItem = () => {
-	// We want two states attached, a checkbox of whether the task is done, and the task string itself.
-	const [complete, setComplete] = useState(0); // 0 for no, 1 for yes.
-  const [todo, setTodo] = useState("a");
-  const [isReadOnly, setIsReadOnly] = useState(true);
-  const todoRef = useRef(null);
-
-  const handleInputChange = (e) => {
-    setTodo(e.target.value);
-    console.log(e.target.value);
-  }
+const TodoItem = ({id, text, complete, onTextChange, onCompleteChange, onDelete}) => {
+  const [isReadOnly, setIsReadOnly] = useState(true); // Is the text box editable?
+  const todoRef = useRef(null); // Access the TodoItem in order to check for clicks outside
 
   // On the very first render (hence the [] as the second argument), add an event listener to the document
   // to check whether the TodoText has been clicked (i.e. if it is being edited and clicked off, it returns
@@ -50,9 +40,9 @@ const TodoItem = () => {
 
 	return (
 		<Div>
-			<Input type="checkbox" checked={complete} onChange={() => setComplete(!complete)} />
-			<TodoText ref={todoRef} type="text" value={todo} onChange={handleInputChange} readOnly={isReadOnly} />
-	    <Button onClick={(e) => console.log(complete)}>Delete</Button>
+			<Input type="checkbox" checked={complete} onChange={() => onCompleteChange(id)} />
+			<TodoText ref={todoRef} type="text" value={text} onChange={(e) => onTextChange(id, e.target.value)} readOnly={isReadOnly} />
+	    <Button onClick={() => onDelete(id)}>Delete</Button>
       <Button onClick={() => setIsReadOnly(false)}>Edit</Button>
 		</Div>
 	);

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TodoItem from "./TodoItem";
+import TodoContainer from "./TodoContainer";
 
-const element = <TodoItem name="Henry"></TodoItem>;
+const element = <TodoContainer></TodoContainer>;
 
 ReactDOM.render(element, document.getElementById("root"));
