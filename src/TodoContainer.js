@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import TodoItem from "./TodoItem";
+import NewTodo from "./NewTodo";
 
 const Div = styled.div`
   display: flex;
@@ -27,8 +28,13 @@ const TodoContainer = () => {
     setTodos(todos.filter((_,i) => i !== index));
   }
 
+  const addNewTodo = (text) => {
+    setTodos([...todos, {text, id:todos.length, complete:false}]);
+  }
+
   return (
     <Div>
+      <NewTodo onNewTodo={addNewTodo}></NewTodo>
       {todos.map(e => <TodoItem key={e.id} id={e.id} text={e.text} complete={e.complete} onTextChange={handleTextChange} onCompleteChange={handleCompleteChange} onDelete={handleDelete} />)}
     </Div>
   );
